@@ -1,0 +1,12 @@
+<launch>
+	<group ns="/palletizer_robot">
+		<param name="tf_prefix" value="1"/>
+		
+		<param name="/palletizer_robot/robot_description" command="$(find xacro)/xacro --inorder '$(find palletizer_arm_model)/urdf/palletizer/palletizer_model.urdf'"/>
+
+		<node name="robot_state_publisher1" pkg="robot_state_publisher" type="robot_state_publisher" output = "screen"/>
+		
+		<node name="joint_states_remap" pkg="palletizer_arm_model" type="remap_pal_node.py" output = "screen"/>
+	</group>
+
+</launch>

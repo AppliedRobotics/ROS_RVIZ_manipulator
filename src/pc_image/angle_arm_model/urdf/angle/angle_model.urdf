@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<robot name="angle_arm_model" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:include filename="$(find angle_arm_model)/urdf/angle/ang_links_joints_templates.xacro" />
+	<xacro:include filename="$(find angle_arm_model)/urdf/angle/ang_joints_names.xacro" />
+	<xacro:include filename="$(find angle_arm_model)/urdf/angle/ang_joints_limit.xacro" />
+
+	<link_0_sub/>
+	<link name="world"/>
+	<joint name="ang_base" type = "fixed">
+		<parent link="world"/>
+      		<child link="link_0"/>
+		<origin rpy = "0 0 1.57" xyz="0 -231.257 0" />
+	</joint>    
+	
+	<segment n="${joint_1_name}" parent="link_0" child="link_1" cad_type="2"
+			 xyz="0 1 0" origin="0 0 107" rpy="1.57 0 0"
+			 type_of_motion="revolute" lower_motion="${joint_1_lo_mo}" upper_motion="${joint_1_up_mo}"/>
+	<segment n="${joint_2_name}" parent="link_1" child="link_2" cad_type="3"
+			 xyz="0 0 1" origin="0 51.8 0" rpy="0 0 0"
+			 type_of_motion="revolute" lower_motion="${joint_2_lo_mo}" upper_motion="${joint_2_up_mo}"/>
+	<segment n="${joint_3_name}" parent="link_2" child="link_3" cad_type="4"
+			 xyz="0 0 1" origin="62.6 198.9 0" rpy="0 0 0"
+			 type_of_motion="revolute" lower_motion="${joint_3_lo_mo}" upper_motion="${joint_3_up_mo}"/>
+	<segment n="${joint_4_name}" parent="link_3" child="link_4" cad_type="5"
+			 xyz="0 -1 0" origin="130.93 0 0" rpy="-1.57 0 1.57"
+			 type_of_motion="revolute" lower_motion="${joint_4_lo_mo}" upper_motion="${joint_4_up_mo}"/>
+	<segment n="${joint_5_name}" parent="link_4" child="link_5" cad_type="6"
+			 xyz="0 0 -1" origin="0 0 -61.74" rpy="0 0 0"
+			 type_of_motion="revolute" lower_motion="${joint_5_lo_mo}" upper_motion="${joint_5_up_mo}"/>
+	<segment n="gripper" parent="link_5" child="finger" cad_type="7"
+			 xyz="0 0 1" origin="0 0 -71.5" rpy="1.57 3.14 0"
+			 type_of_motion="prismatic" lower_motion="0" upper_motion="20"/>
+
+	<link name="finger_l">
+	  <inertial>
+        <mass value="100" />
+        <origin rpy="1.57 3.14 0" xyz="0 0 -1" />
+        <inertia ixx="1" ixy="1" ixz="1" iyy="0" iyz="0" izz="0" />
+      </inertial>
+	   <collision>
+        <origin rpy="0 0 0" xyz="0 0 0" />
+        <geometry>
+          <mesh filename="package://angle_arm_model/meshes/angle/link7.stl" scale="1 1 1"/>
+        </geometry>
+      </collision>
+      <visual>
+        <geometry>
+          <mesh filename="package://angle_arm_model/meshes/angle/link7.stl" scale="1 1 1"/>
+        </geometry>
+		<material name="grey"/>
+      </visual>
+    </link>
+	
+	<joint name="gripper_sub" type="prismatic">
+		<parent link="link_5"/>
+		<child link="finger_l"/>
+		<origin xyz = "0 0 -71.5" rpy="-1.57 0 0" />
+		<axis xyz="0 0 1" />
+		<limit effort="1.0" lower="0" upper="20" velocity="5.0"/>
+		<mimic joint="gripper" multiplier="1"/>
+	</joint>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    </plugin>
+  </gazebo>
+  
+
+</robot>

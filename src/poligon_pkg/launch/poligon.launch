@@ -1,0 +1,12 @@
+<launch>
+    	<include file="$(find arms_control_pkg)/launch/angle_arm_control.launch"/>
+	<include file="$(find arms_control_pkg)/launch/palletizer_arm_control.launch"/>
+        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find  poligon_pkg)/rviz/rviz.rviz"/>
+	<group ns="/light">
+		<param name="tf_prefix" value="3"/>
+
+		<param name="/light/robot_description" command="$(find xacro)/xacro --inorder '$(find poligon_pkg)/urdf/object.urdf'"/>
+
+		<node name="robot_state_publisher4" pkg="robot_state_publisher" type="robot_state_publisher" output = "screen"/>
+	</group>
+</launch>

@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="joint_1_lo_mo" value="-3.14" />
+  <xacro:property name="joint_1_up_mo" value="3.14" />
+  <xacro:property name="joint_2_lo_mo" value="-1.57" />
+  <xacro:property name="joint_2_up_mo" value="1.57" />
+  <xacro:property name="joint_3_lo_mo" value="-1.57" />
+  <xacro:property name="joint_3_up_mo" value="1.57" />
+  <xacro:property name="joint_4_lo_mo" value="-1.57" />
+  <xacro:property name="joint_4_up_mo" value="1.17" />
+  <xacro:property name="joint_5_lo_mo" value="-2.60" />
+  <xacro:property name="joint_5_up_mo" value="2.60" />
+</robot>

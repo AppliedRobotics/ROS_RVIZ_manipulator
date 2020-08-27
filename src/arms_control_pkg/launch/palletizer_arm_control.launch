@@ -1,0 +1,4 @@
+<launch>
+	<include file="$(find palletizer_arm_model)/launch/model_pal.launch"/>
+	<include file="$(find palletizer_arm_pkg)/launch/palletizer_arm_control.launch"/>
+</launch>

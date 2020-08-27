@@ -1,0 +1,4 @@
+<launch>
+	<include file="$(find angle_arm_model)/launch/model_ang.launch"/>
+	<include file="$(find angle_arm_pkg)/launch/angle_arm_control.launch"/>
+</launch>

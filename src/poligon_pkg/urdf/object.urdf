@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<robot name="palletizer_model" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<link name ="world"/>
+	<joint name="light_ang_joint" type="fixed">
+		<parent link="world"/>
+		<child link="light_angle"/>
+		<origin xyz = "292.084 -415 0" rpy="0 0 0" />
+		<axis xyz="0 1 0" />
+	</joint>
+
+	<link name="light_angle">
+		<collision>
+			<origin xyz = "0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://poligon_pkg/meshes/light.stl" scale="1 1 1"/>
+			</geometry>
+		</collision>
+		<visual>
+			<geometry>
+				<mesh filename="package://poligon_pkg/meshes/light.stl" scale="1 1 1"/>
+			</geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  			</material>
+		</visual>
+	</link>
+
+	<joint name="light_pal_joint" type="fixed">
+		<parent link="world"/>
+		<child link="light_palletizer"/>
+		<origin xyz = "292.084 415 0" rpy="0 0 0" />
+		<axis xyz="0 1 0" />
+	</joint>
+
+	<link name="light_palletizer">
+		<collision>
+			<origin xyz = "0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://poligon_pkg/meshes/light.stl" scale="1 1 1"/>
+			</geometry>
+		</collision>
+		<visual>
+			<geometry>
+				<mesh filename="package://poligon_pkg/meshes/light.stl" scale="1 1 1"/>
+			</geometry>
+			<material name="grey">
+    				<color rgba="0.7 0.7 0.7 1.0"/>
+  			</material>
+		</visual>
+	</link>
+</robot>

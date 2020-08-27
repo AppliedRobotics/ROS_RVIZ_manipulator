@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <material name="grey">
+    <color rgba="0.7 0.7 0.7 1.0"/>
+  </material>
+
+  <xacro:macro name="segment" params="n parent child cad_type xyz origin rpy type_of_motion lower_motion upper_motion">
+
+    <joint name="${n}" type="${type_of_motion}">
+      <parent link="${parent}"/>
+      <child link="${child}"/>
+      <origin xyz = "${origin}" rpy="${rpy}" />
+      <axis xyz="${xyz}" />
+      <limit effort="1.0" lower="${lower_motion}" upper="${upper_motion}" velocity="5.0"/>
+    </joint>
+
+    <link name="${child}">
+	   <collision>
+        <origin rpy="0 0 0" xyz="0 0 0" />
+        <geometry>
+          <mesh filename="package://angle_arm_model/meshes/angle/link${cad_type}.stl" scale="1 1 1"/>
+        </geometry>
+      </collision>
+      <visual>
+        <geometry>
+          <mesh filename="package://angle_arm_model/meshes/angle/link${cad_type}.stl" scale="1 1 1"/>
+        </geometry>
+		<material name="grey"/>
+      </visual>
+    </link>
+
+  </xacro:macro>
+
+  <xacro:macro name = "link_0_sub">
+	<link name="link_0">
+	   <collision>
+        <origin rpy="0 0 05" xyz="0 0 0" />
+        <geometry>
+          <mesh filename="package://angle_arm_model/meshes/angle/link1.stl" scale="1 1 1"/>
+        </geometry>
+      </collision>
+      <visual>
+        <geometry>
+          <mesh filename="package://angle_arm_model/meshes/angle/link1.stl" scale="1 1 1"/>
+        </geometry>
+	  <material name="grey"/>
+      </visual>
+	</link>
+  </xacro:macro>
+</robot>

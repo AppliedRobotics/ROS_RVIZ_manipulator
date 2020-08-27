@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="joint_1_name" value="ang_joint_1" />
+  <xacro:property name="joint_2_name" value="ang_joint_2" />
+  <xacro:property name="joint_3_name" value="ang_joint_3" />
+  <xacro:property name="joint_4_name" value="ang_joint_4" />
+  <xacro:property name="joint_5_name" value="ang_joint_5" />
+</robot>

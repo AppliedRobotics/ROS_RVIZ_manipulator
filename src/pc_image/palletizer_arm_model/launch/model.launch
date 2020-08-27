@@ -1,0 +1,17 @@
+<launch>
+	<group ns="/palletizer_robot">
+		<param name="tf_prefix" value="1"/>
+		
+		<param name="/palletizer_robot/robot_description" command="$(find xacro)/xacro --inorder '$(find palletizer_arm_model)/urdf/palletizer/palletizer_model.urdf'"/>
+
+		<node name="robot_state_publisher1" pkg="robot_state_publisher" type="robot_state_publisher" output = "screen"/>
+		
+		<node name="joint_states_remap" pkg="palletizer_arm_model" type="remap_pal_node.py" output = "screen"/>
+		<node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher1">
+			<param name="/use_gui" value="true"/>
+			<remap from="/palletizer_robot/joint_states" to="/palletizer_robot/joint_states_remap"/>
+		</node>
+		
+	</group>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find  palletizer_arm_model)/rviz/rviz.rviz"/>
+</launch>
