@@ -5,11 +5,10 @@ from RoboticArmClass import RoboticArm
 from inverse_problem_srv.srv import point_cmd,point_cmdResponse
 from inverse_problem_srv.srv import publish_cmd,publish_cmdResponse
 
-rospy.sleep(1)
+rospy.wait_for_service('/angle_robot/cmd_joint_state_in_manip_coord')
 
 nameList = ['ang_joint_1','ang_joint_2','ang_joint_3','ang_joint_4','ang_joint_5','gripper']
 jointStateSrv = rospy.ServiceProxy('/angle_robot/cmd_joint_state_in_manip_coord', publish_cmd)
-lastGoalJointState = 0
 gripperPose = '0'
 
 def ParseMsg(msg):
@@ -42,7 +41,7 @@ def MoveToPointCallback(msg):
         strCmd = strName + ' ' + strJS
         jointStateSrv(strCmd)
         rospy.loginfo('Well Done!!!')
-    	return point_cmdResponse(True)
+        return point_cmdResponse(True)
 
 def GripperCmdCallback(msg):
     global gripperPose

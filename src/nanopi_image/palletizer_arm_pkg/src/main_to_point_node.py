@@ -5,11 +5,10 @@ from RoboticArmPalletizerClass import RoboticArm
 from inverse_problem_srv.srv import point_cmd,point_cmdResponse
 from inverse_problem_srv.srv import publish_cmd,publish_cmdResponse
 
-rospy.sleep(1)
+rospy.wait_for_service('/palletizer_robot/cmd_joint_state_in_manip_coord')
 
 nameList = ['pal_joint_0','pal_joint_1','pal_joint_2','pal_joint_3','prisos_joint']
 jointStateSrv = rospy.ServiceProxy('/palletizer_robot/cmd_joint_state_in_manip_coord', publish_cmd)
-lastGoalJointState = 0
 gripperPose = '0'
 
 def ParseMsg(msg):
@@ -43,7 +42,7 @@ def MoveToPointCallback(msg):
         strCmd = strName + ' ' + strJS
         jointStateSrv(strCmd)
         rospy.loginfo('Well Done!!!')
-    	return point_cmdResponse(True)
+        return point_cmdResponse(True)
 
 def GripperCmdCallback(msg):
     global gripperPose
